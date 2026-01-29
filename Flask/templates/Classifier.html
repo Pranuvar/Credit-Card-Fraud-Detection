@@ -1,0 +1,110 @@
+<html>
+	<head>
+	<style>
+	
+
+	.container:hover
+	{
+		background-color:rgb(210, 211, 211);
+	}
+	input[type="number"]:hover ,.form-control:hover,  select :hover
+	{
+		color: rgb(29, 25, 25);
+		font-weight: bold;
+	}	
+	
+	</style>
+
+	<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		<title>Classifier</title>
+	</head>
+	<body style="background-color: #f06500;">
+	<!-- Java Script -->	
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+		<!-- Navbar-->
+		<nav class="navbar navbar-dark " style="background-color: #201b25;">
+			<span class="navbar-brand mb-0 h1"><p style="margin:auto 500px;font-weight: bold;"> CREDIT CARD FRAUD DETECTION </p></span>
+		</nav>
+		<div class="container" style="background-color: #f06500;">
+			<br>
+			<!--Form-->
+			<form action = "{{url_for('mlprediction')}}" method ="POST" style="background-color:#f06500">
+				<fieldset>
+				<legend style="color: #201b25;font-weight: bold;"> CREDIT CARD FRAUD CLASSIFIER </legend><br>
+				  <div class="card card-body" >
+					  
+					  <div class="form-group  row">
+						  <div class="col-sm">
+							<label for="cm"  style="font-weight: bold;">Category of Merchant</label>
+							<input type="text" class="form-control" id="cm" name="cm"  required>
+						  </div>
+						  <div class="col-sm">
+							<label for="at"  style="font-weight: bold;">Amount of Transaction</label>
+							<input type="float" class="form-control" id="at" name="at"  required>
+						  </div>
+						  <div class="col-sm">
+							<label for="gcch"  style="font-weight: bold;">Gender of Credit Card Holder</label>
+							<select class="form-control" id="gcch"  name="gcch" required>
+							  <option disabled selected value> -- Select an Option -- </option>
+								<option value = "F">Female</option>
+								<option value = "M">Male</option>
+							</select>
+						  </div>
+					  </div>
+					  
+					  <br>
+					  <div class="form-group row">
+							<div class="col-sm">
+								<label for="ccch"  style="font-weight: bold;">City of Credit Card Holder</label>
+								<input type="text" class="form-control" id="ccch" name="ccch" required>
+							  </div>
+							  <div class="col-sm">
+								<label for="scch"  style="font-weight: bold;">State of Credit Card Holder</label>
+								<input type="text" class="form-control" id="scch" name="scch" required>
+								</div>
+								
+								<div class="col-sm">
+								<label for="zcch"  style="font-weight: bold;">Zip of Credit Card Holder</label>
+								<input type="number" class="form-control" id="zcch" name="zcch" required>
+								</div>
+						  </div>
+						  <br>
+						  <div class="form-group  row">
+						  <div class="col-sm">
+							<label for="cchcp"  style="font-weight: bold;"> Credit Card Holder's City Population </label>
+							<input type="number" class="form-control" id="cchcp" name="cchcp" required>
+						  </div>
+						  <div class="col-sm">
+							<label for="jcch" style="font-weight: bold;">Job of Credit Card Holder</label>
+							<input type="text" class="form-control" id="jcch" name="jcch" required>
+						  </div>
+						  
+					  </div>
+					  <br>
+					  <div class="form-group">
+						<input style="background: #201b25;margin: auto;font-weight: bold;width:1070px;height: 50px;" class="btn btn-primary" type="submit" value="Predict">
+					  </div>
+					  
+						<!--Prediction Result-->
+						<center>
+					  <div id ="result">
+						<strong style="color:#201b25 ;font-weight: bold;font-size: 30px;" >{{result}}{{positive}}<br>{{res2}}</strong>
+				 		</div>
+						</center>
+				     </div>
+			 </fieldset>
+			</form>
+			
+		</div>
+		
+	</body>
+</html>
+
