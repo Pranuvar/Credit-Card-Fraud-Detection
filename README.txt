@@ -1,48 +1,152 @@
-Credit Card Fraud Detection System
-Developer: Praneeth Varma Danthuluri
+# 💳 Credit Card Fraud Detection System
 
-📌 Project Overview This project focuses on creating a robust system to increase the security of financial transactions by identifying fraudulent activity using machine learning. It analyzes historical transaction data to differentiate between honest and dishonest transactions.
+> ML-based fraud detection system benchmarking Logistic Regression, Random Forest, and Decision Tree classifiers — with SMOTE for class imbalance and a Flask web interface for real-time predictions.
 
-🛠️ Machine Learning Models The project implements and compares three primary algorithms:
+---
 
-Logistic Regression: Used for its simplicity and transparency in providing probabilistic baseline alerts.
+## The Problem
 
-Random Forest Classifier: An ensemble method that handles high-dimensional data and achieves high accuracy.
+Credit card fraud is a rare but costly event. Real-world transaction datasets are severely imbalanced — fraudulent transactions represent a tiny fraction of total records. A naive model that predicts "legitimate" for everything can achieve 99% accuracy while being completely useless in practice.
 
-Decision Tree Classifier: Employed for its interpretability and ability to trace logical rules for classification.
+This project builds an end-to-end fraud detection pipeline that correctly handles class imbalance, benchmarks multiple classifiers, and deploys a working prediction interface.
 
+---
 
-Shutterstock
-📊 Methodology
+## Key Results
 
-Handling Class Imbalance: Utilized techniques like SMOTE (Synthetic Minority Over-sampling Technique) to ensure the models effectively capture rare fraudulent instances.
+| Metric | Detail |
+|---|---|
+| **Models benchmarked** | Logistic Regression · Random Forest · Decision Tree |
+| **Class imbalance** | Addressed with SMOTE (training set only) |
+| **Hyperparameter tuning** | Grid Search + Cross-Validation |
+| **Evaluation metrics** | Accuracy · Precision · Recall · F1-Score |
+| **Deployment** | Flask web interface for real-time inference |
+| **Dataset** | Kaggle credit card transactions (Jan 2019 – Dec 2020) |
 
-Optimization: Employed Cross-Validation and Grid Search for hyperparameter tuning.
+---
 
-Performance Indicators: Models were evaluated based on accuracy, precision, recall, and F1-score.
+## Architecture
 
-📂 Dataset The project utilizes a simulated Credit Card Transactions dataset covering the period from January 2019 to December 2020.
+```
+Raw Transaction Data (Kaggle CSV)
+           ↓
+Exploratory Data Analysis
+           ↓
+Preprocessing & Feature Engineering
+           ↓
+SMOTE — Class Imbalance Correction (training set only)
+           ↓
+Model Training & Benchmarking
+  ├── Logistic Regression (probabilistic baseline)
+  ├── Decision Tree (interpretable rules)
+  └── Random Forest (ensemble, highest accuracy)
+           ↓
+Grid Search + Cross-Validation (hyperparameter tuning)
+           ↓
+Evaluation — Precision · Recall · F1-Score · Confusion Matrix
+           ↓
+Flask Web Interface — Real-time prediction input/output
+```
 
-Link: https://www.kaggle.com/datasets/kartik2112/fraud-detection
+---
 
-🚀 Setup & Installation (How to Run) Follow these steps to load and run the project:
+## Model Comparison
 
-Google Drive Setup (Jupyter Notebook)
+| Model | Strengths | Trade-off |
+|---|---|---|
+| **Logistic Regression** | Fast, transparent, probabilistic output | Lower accuracy on non-linear patterns |
+| **Decision Tree** | Interpretable rules, easy to explain | Prone to overfitting |
+| **Random Forest** | High accuracy, handles high-dimensional data | Less interpretable |
 
-Create a folder named "credit_card_fraud_detection" in your Google Drive.
+---
 
-Upload the "Final_code.ipynb" file into that folder.
+## Tech Stack
 
-Create a sub-folder named "Data" inside that folder and upload your dataset CSV file.
+| Layer | Tools |
+|---|---|
+| Language | Python 3.x |
+| ML Framework | Scikit-learn |
+| Class Balancing | imbalanced-learn (SMOTE) |
+| Data Processing | Pandas · NumPy |
+| Tuning | GridSearchCV · Cross-Validation |
+| Web Interface | Flask · HTML · CSS · JavaScript |
+| Notebook | Jupyter Notebook |
+| Version Control | Git |
 
-Flask GUI (Web Interface)
+---
 
-Unzip the project folder on your local system.
+## Dataset
 
-Ensure "credit_card_fraud_detection" is the main folder.
+**Simulated Credit Card Transactions** — Jan 2019 to Dec 2020  
+Available on Kaggle: [kartik2112/fraud-detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection)
 
-Open the "Flask" folder in Visual Studio Code.
+Download the dataset and place the CSV in the `/data` folder before running.
 
-Install all required libraries via the terminal using the command: pip install -r requirements.txt
+---
 
-Run the application using the command: python app.py
+## How to Run
+
+### Prerequisites
+- Python 3.9+
+
+```bash
+git clone https://github.com/Pranuvar/Credit-Card-Fraud-Detection.git
+cd Credit-Card-Fraud-Detection
+```
+
+### Option 1 — Jupyter Notebook (analysis + training)
+
+```bash
+pip install -r requirements.txt
+
+# Open and run Final_code.ipynb
+jupyter notebook Final_code.ipynb
+```
+
+### Option 2 — Flask Web Interface (real-time prediction)
+
+```bash
+cd Flask
+pip install -r requirements.txt
+python app.py
+```
+
+Open `http://localhost:5000` in your browser. Enter transaction features and get an instant fraud/legitimate prediction.
+
+---
+
+## Project Structure
+
+```
+Credit-Card-Fraud-Detection/
+├── Flask/
+│   ├── app.py              # Flask application
+│   ├── templates/          # HTML frontend
+│   ├── static/             # CSS & JavaScript
+│   └── requirements.txt
+├── Final_code.ipynb        # Full ML pipeline (EDA → training → evaluation)
+├── Final_code.pdf          # Notebook export
+├── dataset_link.txt        # Kaggle dataset link
+└── README.md
+```
+
+---
+
+## Why These Design Choices?
+
+**Why SMOTE only on training data?**  
+Applying SMOTE to the full dataset before splitting would cause data leakage — synthetic fraudulent samples would appear in the test set, giving an inflated picture of real-world performance. SMOTE was applied strictly after the train/test split.
+
+**Why benchmark three models?**  
+Each serves a different purpose. Logistic Regression is the interpretable baseline every stakeholder understands. Decision Trees show explicit decision rules useful for audit and compliance. Random Forest delivers the best predictive accuracy. Comparing all three gives an honest view of the trade-offs.
+
+**Why Flask?**  
+Moving from notebook to a deployed interface is the step that separates a data science experiment from a usable product. The Flask app demonstrates the full cycle — from trained model to real-time prediction.
+
+---
+
+## Author
+
+**Praneeth Varma Danthuluri**
+MSc Artificial Intelligence — National College of Ireland
+[LinkedIn](https://linkedin.com/in/praneeth-varma-danthuluri) · [Portfolio](https://Pranuvar.github.io)
